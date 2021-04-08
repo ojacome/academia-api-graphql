@@ -64,6 +64,28 @@ const mutation: IResolvers = {
                 teacher:        '',
                 reviews:        []
             }
+        },
+        eliminarCurso(__:void, { id }): any {
+            const borrarCurso = _.remove(database.cursos , function(curso) {
+                return curso.id === id;                
+            })
+
+            if( borrarCurso[0] === undefined ){
+                return {
+                    id:             '-1',
+                    title:          `error al eliminar ya que el curso NO existe`,
+                    description:    '',
+                    clases:         -1,
+                    time:           0.0,
+                    logo:           '',
+                    level:          'TODOS',
+                    path:           '',
+                    teacher:        '',
+                    reviews:        []
+                }
+            }
+
+            return borrarCurso[0];
         }        
     }
 }
